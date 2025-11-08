@@ -17,16 +17,73 @@ namespace UnitConverter.Controllers
             return View();
         }
 
+        [HttpGet]
         public IActionResult Length()
         {
+            ViewBag.Longitudes = Longitudes.Keys;
             return View();
         }
+
+        [HttpPost]
+        public IActionResult Length([Bind("Input,UnitFrom,UnitTo")] Unidad unidad)
+        {
+            double resultado = ConvertirLongitud(unidad.Input, unidad.UnitFrom, unidad.UnitTo);
+            ViewData["Resultado"] = $"{unidad.Input} {unidad.UnitFrom} son: {resultado} {unidad.UnitTo}";
+            ViewBag.Longitudes = Longitudes.Keys;
+            return View();
+        }
+
+        [HttpGet]
         public IActionResult Weight()
         {
+            ViewBag.Pesos = Pesos.Keys;
             return View();
         }
+
+        [HttpPost]
+        public IActionResult Weight([Bind("Input,UnitFrom,UnitTo")] Unidad unidad)
+        {
+            double resultado = ConvertirPeso(unidad.Input, unidad.UnitFrom, unidad.UnitTo);
+            ViewData["Resultado"] = $"{unidad.Input} {unidad.UnitFrom} son: {resultado} {unidad.UnitTo}";
+            ViewBag.Pesos = Pesos.Keys;
+            return View();
+        }
+        [HttpGet]
         public IActionResult Temperature()
         {
+            ViewBag.Pesos = Pesos.Keys;
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Temperature([Bind("Input,UnitFrom,UnitTo")] Unidad unidad)
+        {
+            double result = 0;
+            if (unidad.UnitFrom == "Celsius" && unidad.UnitTo == "Fahrenheit")
+            {
+                result = (unidad.Input * 9 / 5) + 32;
+            }
+            else if (unidad.UnitFrom == "Fahrenheit" && unidad.UnitTo == "Celsius")
+            {
+                result = (unidad.Input - 32) * 5 / 9;
+            }
+            else if (unidad.UnitFrom == "Celsius" && unidad.UnitTo == "Kelvin")
+            {
+                result = unidad.Input + 273.15;
+            }
+            else if (unidad.UnitFrom == "Kelvin" && unidad.UnitTo == "Celsius")
+            {
+                result = unidad.Input - 273.15;
+            }
+            else if (unidad.UnitFrom == "Fahrenheit" && unidad.UnitTo == "Kelvin")
+            {
+                result = (unidad.Input - 32) * 5 / 9 + 273.15;
+            }
+            else if (unidad.UnitFrom == "Kelvin" && unidad.UnitTo == "Fahrenheit")
+            {
+                result = (unidad.Input - 273.15) * 9 / 5 + 32;
+            }
+            ViewData["Resultado"] = $"{unidad.Input} {unidad.UnitFrom} son: {result} {unidad.UnitTo}";
             return View();
         }
 
@@ -55,7 +112,6 @@ namespace UnitConverter.Controllers
             {"Pies", 0.3048},
             {"Yarda", 0.9144},
             {"Milla", 1609.34 }
-
         };
 
         public static double ConvertirPeso(double input, string fromUnit, string toUnit)

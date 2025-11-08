@@ -1,0 +1,41 @@
+﻿@model Unidad
+
+@if (ViewData["Resultado"] == null)
+{
+    <form target="_self" action="" method="post">
+        <label>Peso a convertir</label>
+        <input type="number" name="Input" />
+
+        <label>De:</label>
+        <select name="UnitFrom">
+            @if (ViewBag.Pesos != null)
+            {
+                foreach (var unidad in ViewBag.Pesos)
+                {
+                    <option value="@unidad">@unidad</option>
+                }
+            }
+
+        </select>
+        <label>A:</label>
+        <select name="UnitTo">
+            @if (ViewBag.Pesos != null)
+            {
+                foreach (var unidad in ViewBag.Pesos)
+                {
+                    <option value="@unidad">@unidad</option>
+                }
+            }
+        </select>
+        <button type="submit">Convertir</button>
+    </form>
+}
+else
+{
+    <h3>@ViewData["Resultado"]</h3>
+    <form method="get">
+        <button type="submit">Reiniciar</button>
+    </form>
+}
+
+

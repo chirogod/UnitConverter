@@ -1,0 +1,37 @@
+﻿@model Unidad
+@if (ViewData["Resultado"] == null)
+{
+    <form action="" target="_self" method="post">
+        <label>Longitud a convertir</label>
+        <input type="number" name="Input" />
+
+        <label>De:</label>
+        <select name="UnitFrom">
+            @if (ViewBag.Longitudes != null)
+            {
+                foreach (var unidad in ViewBag.Longitudes)
+                {
+                    <option value="@unidad">@unidad</option>
+                }
+            }
+        </select>
+        <label>A:</label>
+        <select name="UnitTo">
+            @if (ViewBag.Longitudes != null)
+            {
+                foreach (var unidad in ViewBag.Longitudes)
+                {
+                    <option value="@unidad">@unidad</option>
+                }
+            }
+        </select>
+        <button type="submit">Convertir</button>
+    </form>
+}
+else
+{
+    <h3>@ViewData["Resultado"]</h3>
+    <form action="" target="_self" method="get">
+        <button type="submit">Reiniciar</button>
+    </form>
+}
