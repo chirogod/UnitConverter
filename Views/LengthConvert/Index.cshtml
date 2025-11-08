@@ -1,0 +1,20 @@
+﻿@model Unidad
+<form action="/LengthConvert" method="post">
+    <label>Longitud a convertir</label>
+    <input type="number" name="Input" />
+
+    <label>De:</label>
+    <select name="UnitFrom">
+        <option value="Milimetros">Milimetros</option>
+        <option value="Centimetros">Centimetros</option>
+        <option value="Metros">Metros</option>
+    </select>
+    <label>A:</label>
+    <select name="UnitTo">
+        <option value="Milimetros">Milimetros</option>
+        <option value="Centimetros">Centimetros</option>
+        <option value="Metros">Metros</option>
+    </select>
+    <button type="submit">Convertir</button>
+</form>
+@ViewData["Resultado"]

@@ -1,0 +1,20 @@
+﻿@model Unidad
+<form action="/WeightConvert" method="post">
+    <label>Peso a convertir</label>
+    <input type="number" name="Input" />
+
+    <label>De:</label>
+    <select name="UnitFrom">
+        <option value="Miligramos">Miligramos</option>
+        <option value="Gramos">Gramos</option>
+        <option value="Kilogramos">Kilogramos</option>
+    </select>
+    <label>A:</label>
+    <select name="UnitTo">
+        <option value="Miligramos">Miligramos</option>
+        <option value="Gramos">Gramos</option>
+        <option value="Kilogramos">Kilogramos</option>
+    </select>
+    <button type="submit">Convertir</button>
+</form>
+@ViewData["Resultado"]
